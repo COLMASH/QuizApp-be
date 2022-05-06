@@ -24,16 +24,6 @@ module.exports = {
     }
   },
 
-  async showSubscribed(req, res) {
-    try {
-      const { userId } = req;
-      const user = await User.findById(userId).populate("subscribedQuizzes");
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(404).json({ message: error.message });
-    }
-  },
-
   async update(req, res) {
     try {
       const { quizId } = req.body;

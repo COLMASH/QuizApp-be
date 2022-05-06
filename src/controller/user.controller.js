@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 
 const { welcome } = require("../utils/mailer");
 const User = require("../models/user.model");
-const Quiz = require("../models/quiz.model");
 
 module.exports = {
   async list(req, res) {
@@ -64,7 +63,6 @@ module.exports = {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
-          phone: user.phone,
           profilePicture: user.profilePicture,
         },
       });
@@ -95,47 +93,9 @@ module.exports = {
           name: user.name,
           lastName: user.lastName,
           email: user.email,
-          phone: user.phone,
           profilePicture: user.profilePicture,
         },
       });
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  },
-
-  async subscribeQuiz(req, res) {
-    try {
-      const { quizId } = req.body;
-      const { userId } = req;
-      let userInit = await User.findById(userId);
-      if (userInit.subscribedQuizzes.includes(quizId)) {
-        res.status(200).json("already");
-      } else {
-        await User.updateOne(
-          { _id: userId },
-          { $addToSet: { subscribedQuizzes: quizId } }
-        );
-        await Quiz.updateOne({ _id: quizId }, { $addToSet: { users: userId } });
-        let user = await User.findById(userId).populate("quizzes");
-        res.status(200).json(user);
-      }
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  },
-
-  async unsubscribeQuiz(req, res) {
-    try {
-      const { quizId } = req.body;
-      const { userId } = req;
-      await User.updateOne(
-        { _id: userId },
-        { $pull: { subscribedQuizzes: quizId } }
-      );
-      await Quiz.updateOne({ _id: quizId }, { $pull: { users: userId } });
-      const quizUnsubscribed = await Quiz.findById(quizId);
-      res.status(200).json(quizUnsubscribed);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }

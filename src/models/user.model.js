@@ -31,10 +31,6 @@ const userSchema = new Schema(
         },
       ],
     },
-    phone: {
-      type: String,
-      required: [true, "'Phone' field is required"],
-    },
     password: {
       type: String,
       required: [true, "'Password' field is required"],
@@ -46,10 +42,7 @@ const userSchema = new Schema(
     },
     quizzes: {
       type: [{ type: Schema.Types.ObjectId, ref: "Quiz" }],
-    },
-    subscribedQuizzes: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Quiz" }],
-    },
+    }
   },
   {
     timestamps: true,

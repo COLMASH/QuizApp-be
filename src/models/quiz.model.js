@@ -1,10 +1,10 @@
 const { Schema, model, models } = require("mongoose");
 
 const quizSchema = new Schema(
-  {
-    title: {
+  { 
+    name: {
       type: String,
-      required: [true, "'Title' field is required"],
+      required: [true, "'Name' field is required"],
     },
     creator: {
       type: Schema.Types.ObjectId,
@@ -19,9 +19,6 @@ const quizSchema = new Schema(
           questionName: String
       }
   }],
-    users: {
-      type: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    },
     picture: String,
   },
   {

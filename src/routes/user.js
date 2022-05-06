@@ -6,8 +6,6 @@ router.route("/signin").post(userController.signin);
 router.route("/signup").post(userController.signup);
 router.route("/userList").get(userController.list);
 router.route("/userInfo").get(auth, userController.show);
-router.route("/userSubscribeQuizzes").put(auth, userController.subscribeQuiz);
-router.route("/userUnsubscribeQuizzes").put(auth, userController.unsubscribeQuiz);
 router.route("/userProfilePic").put(auth, formData, userController.update);
 router.route("/userUpdate").put(auth, formData, userController.update);
 router.route("/:userId").delete(userController.destroy);
