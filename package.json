@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "description": "quiz app backend",
+  "engines": {
+    "node": "14.18",
+    "npm": "7.24"
+  },
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js"
